@@ -1,0 +1,137 @@
+<div style="width: 100%">
+    <div class="container mb-5" style="max-width: 800px">
+        <div class="header">
+            <h1>Capitulos de Propuestas de Grado</h1>
+        </div>
+        <form action="/links/capitulos" enctype="multipart/form-data" class="registration-form" method="POST">
+            <div class="mb-4">
+                <div class="input-group">
+                    <select name="num_cap" id="">
+                        <option value="CapituloI">Capitulo I</option>
+                        <option value="CapituloII">Capitulo II</option>
+                        <option value="CapituloIII">Capitulo III</option>
+                    </select>
+                    <div class="drop-zone" onclick="document.getElementById('fileInput').click()">
+                        <div id="fileInfo"><h5>📄 Subir un Archivo PDF</h5></div>
+                    </div>
+                    <input class="d-none" type="file" name="archivo" id="fileInput" accept=".pdf" required>
+                </div>
+                <div id="fileInfo"></div>
+                <div class="">
+                    <button type="submit" class="signup-btn m-1">Enviar Capitulo</button>
+                </div>
+            </div>
+
+            <script>
+                const fileInput = document.getElementById('fileInput');
+                const fileInfo = document.getElementById('fileInfo');
+                
+                fileInput.addEventListener('change', function(e) {
+                    if (this.files && this.files.length > 0) {
+                        const file = this.files[0];
+                        // Mostrar información del archivoFile 
+                        fileInfo.innerHTML = `
+                            <h5 class="file-name ">📄 ${file.name}</h5>
+                        `;
+                        fileInfo.style.display = 'block';
+                        
+                        // Aquí puedes agregar más lógica:
+                        // - Previsualización del PDF
+                        // - Subida automática
+                        // - Procesamiento adicional
+                        
+                    } else {
+                        fileInfo.style.display = 'none';
+                    }
+                });
+            </script>
+        </form>
+    </div>
+    
+    <div>
+        <div class="container mb-4" style="max-width: 800px">
+            <div class="header">
+                <h2 class="text-center">Capitulo I</h2>
+            </div>
+        {{#if capituloI}}
+            <a href="http://localhost:4000/uploads/{{capituloI.capitulo}}" target="_blank" style="text-decoration: none;">
+                <div class="drop-zone">
+                    <i class="fa-solid fa-file"></i>
+                    <p class="archivoName">{{capituloI.originalname}}</p>
+                </div>
+            </a>
+        {{else}}
+            <div class="sinArchivos" style="cursor: default;">
+                <p class="text-secondary">Sin Archivos Adjuntado</p>
+            </div>
+        {{/if}}
+        {{#each comentariosI}}
+            <div class="comment">
+                <p style="overflow-wrap: break-word;">{{comentarios}}</p>
+            </div>    
+            
+        {{else}}    
+            <div class="comment">
+                <p class="text-secondary">Sin Comentarios</p>
+            </div>
+        {{/each}}
+        </div>
+
+        <div class="container mb-4" style="max-width: 800px">
+            <div class="header">
+                <h2 class="text-center">Capitulo II</h2>
+            </div>
+        {{#if capituloII}}
+            <a href="http://localhost:4000/uploads/{{capituloII.capitulo}}" target="_blank" style="text-decoration: none;">
+                <div class="drop-zone">
+                    <i class="fa-solid fa-file"></i>
+                    <p class="archivoName">{{capituloII.originalname}}</p>
+                </div>
+            </a>
+        {{else}}
+            <div class="sinArchivos" style="cursor: default;">
+                <p class="text-secondary">Sin Archivos Adjuntado</p>
+            </div>
+        {{/if}}
+        {{#each comentariosII}}
+            <div class="comment">
+                <p style="overflow-wrap: break-word;">{{comentarios}}</p>
+            </div>    
+            
+        {{else}}    
+            <div class="comment">
+                <p class="text-secondary">Sin Comentarios</p>
+            </div>
+        {{/each}}
+        </div>
+
+        <div class="container mb-4" style="max-width: 800px">
+            <div class="header">
+                <h2 class="text-center">Capitulo III</h2>
+            </div>
+        {{#if capituloIII}}
+            <a href="http://localhost:4000/uploads/{{capituloIII.capitulo}}" target="_blank" style="text-decoration: none;">
+                <div class="drop-zone">
+                    <i class="fa-solid fa-file"></i>
+                    <p class="archivoName">{{capituloIII.originalname}}</p>
+                </div>
+            </a>
+        {{else}}
+            <div class="sinArchivos" style="cursor: default;">
+                <p class="text-secondary">Sin Archivos Adjuntado</p>
+            </div>
+        {{/if}}
+        {{#each comentariosIII}}
+            <div class="comment">
+                <p style="overflow-wrap: break-word;">{{comentarios}}</p>
+            </div>    
+            
+        {{else}}   
+            <div class="comment">
+                <p class="text-secondary">Sin Comentarios</p>
+            </div>
+        {{/each}}
+        </div>
+
+    </div>
+</div>

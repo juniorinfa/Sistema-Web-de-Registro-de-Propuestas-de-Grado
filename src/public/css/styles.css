@@ -1,0 +1,279 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', sans-serif;
+}
+
+.spacing {
+    padding: 15px 3rem;
+}
+
+.archivoName{
+    color: #2d3436;
+    margin: 20px 0 0 0;
+    font-size: 18px;
+}
+
+.descargarEstadisticas {
+    position: relative;
+    right: -99%;
+    text-decoration: none;
+}
+
+.eliminarComentario {
+    position: relative;
+    right: -49%;
+    text-decoration: none;
+}
+
+.separacionEstudiantes {
+  flex-grow: 1;
+  flex-basis: 0;
+  min-width: 0;
+  text-align: center;
+}
+
+.drop-zone {
+    border: 2px dashed #ccc;
+    border-radius: 20px;
+    padding: 2rem;
+    text-align: center;
+    cursor: pointer;
+    transition: border-color 0.3s;
+    margin-bottom: 1rem;
+    transition: .4s;
+}
+
+.drop-zone i{
+    color: #ff5e00;
+    font-size: 40px;
+    margin: 0;
+}
+
+.drop-zone:hover {
+    border-color: #ff5e00;
+}
+
+.comment {
+    border: 2px solid #ccc;
+    border-radius: 20px;
+    background-color: #ffff;
+    padding: 1rem;
+    text-align: center;
+    transition: border-color 0.3s;
+    margin-bottom: 1rem;
+    transition: .4s;
+}
+
+.textarea{
+    width: 100%;
+    border: 2px solid #ccc;
+    border-radius: 10px;
+    background-color: #ffffff;
+    padding: 1rem;
+    transition: .4s;
+    height: 60px;
+}
+
+.btnTexarea {
+    padding: 15px;
+    background: #ff7f34;
+    color: #ffffff;
+    border: none;
+    border-radius: 10px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.3s;
+    margin-left: 10px;
+}
+
+.btnTexarea:hover {
+    background: #ff5e00;    
+}
+
+.sinArchivos {
+    border: 2px dashed #ccc;
+    border-radius: 20px;
+    background-color: #ffff;
+    padding: .8rem;
+    text-align: center;
+    transition: border-color 0.3s;
+    margin-bottom: 1rem;
+    transition: .4s;
+}
+
+.container-messagge {
+    width: 100%;
+    padding: 40px;
+}
+
+.container {
+    background: white;
+    width: 100%;
+    padding: 40px;
+    border-radius: 15px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+}
+
+.etiquetas p{
+    margin: 0;
+    font-size: 1.2rem;
+    font-weight: 600;
+}
+
+.header {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.header h1 {
+    color: #2d3436;
+    margin-bottom: 20px;
+    font-size: 2.3rem;
+}
+
+.header p {
+    color: #636e72;
+    font-size: 1rem;
+    margin-bottom: 3rem;
+}
+
+.form-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
+}
+
+.input-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-bottom: 15px;
+}
+
+.input-group.full-width {
+    grid-column: span 2;
+}
+
+label {
+    color: #2d3436;
+    font-weight: 500;
+    font-size: 1rem;
+}
+
+input, select {
+    padding: 12px;
+    border: 2px solid #e0e0e0;
+    border-radius: 8px;
+    font-size: 1rem;
+    width: 100%;
+}
+
+input[type=number]::-webkit-inner-spin-button, 
+input[type=number]::-webkit-outer-spin-button { 
+  -webkit-appearance: none; 
+  margin: 0; 
+}
+
+select {
+    appearance: none;
+    background: url('data:image/svg+xml;utf8,<svg fill="%232d3436" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><path d="M7 10l5 5 5-5z"/></svg>') no-repeat right 10px center/15px 15px;
+}
+
+.btnAprobar {
+    width: 100%;
+    padding: 15px;
+    background: #11a83f;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 600;
+    margin-top: 20px;
+    cursor: pointer;
+    transition: background 0.3s;
+    text-decoration: none;
+}
+
+.btnAprobar:hover {
+    background: #138b37;
+}
+
+.btnRechazar {
+    width: 100%;
+    padding: 15px;
+    background: #d61f19;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 600;
+    margin-top: 20px;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.btnRechazar:hover {
+    background: #af201c;
+}
+
+.signup-btn {
+    width: 100%;
+    padding: 15px;
+    background: #ff7f34;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 600;
+    margin-top: 20px;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.canvas{
+    height: 250px;
+    width: 250px;
+}
+
+.btnExtended{
+    height: 100px;
+    margin: 40px 0;
+}
+
+.signup-btn:hover {
+    background: #ff5e00c0;
+}
+
+.login-link {
+    text-align: center;
+    margin-top: 25px;
+    color: #636e72;
+}
+
+.login-link a {
+    color: #2d3436;
+    font-weight: 600;
+    text-decoration: none;
+}
+
+.displayNone{
+    display: none;
+    transition: 1s ease-in-out;
+}
+
+@media (max-width: 480px) {
+    .container {
+        padding: 25px;
+    }
+            
+    .form-grid {
+        grid-template-columns: 1fr;
+    }
+            
+    .input-group.full-width {
+        grid-column: span 1;
+    }
+}

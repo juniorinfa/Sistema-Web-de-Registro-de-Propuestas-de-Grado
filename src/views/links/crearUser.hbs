@@ -1,0 +1,57 @@
+<div class="container" style="max-width: 500px">
+    <div class="header">
+        <h2>Crear Usuario</h2>
+        <p>Crea una cuenta para acceder al sistema Proyecto de Grado como Profesor o Administrador</p>
+    </div>
+
+    <form action="/crearUser" class="registration-form" method="POST">
+        <div class="form-grid">
+            <div class="input-group">
+                <label>Nombre</label>
+                <input type="text" name="nombre" placeholder="Nombre" required>
+            </div>
+            <div class="input-group">
+                <label>Apellido</label>
+                <input type="text" name="apellido" placeholder="Apellido" required>
+            </div>
+            <div class="input-group full-width">
+                <label>Cédula</label>
+                <input type="number" name="cedula" placeholder="Cédula" required>
+            </div>
+            <div class="input-group full-width">
+                <label>Email</label>
+                <input type="email" name="correo" placeholder="Email" required>
+            </div>
+            <div class="input-group full-width">
+                <label>Sección</label>
+                <select name="seccion" required>
+                    <option value="M01">Sección M01</option>
+                    <option value="M02">Sección M02</option>
+                    <option value="T01">Sección T01</option>
+                    <option value="T02">Sección T02</option>
+                    <option value="F01">Sección F01</option>
+                    <option value="F02">Sección F02</option>
+                    <option value="SP01">Sección SP01</option>
+                    <option value="SP02">Sección SP02</option>
+                </select>
+            </div>
+            <div class="input-group full-width">
+                <label>Tipo de Usuario</label>
+                <select name="userType" required>
+                    <option value="profesor">Profesor</option>
+                    <option value="administrador">Administrador</option>
+                </select>
+            </div>
+            <div class="input-group">
+                <label>Contraseña</label>
+                <input type="password" name="password" placeholder="••••••••••" required>
+            </div> 
+            <div class="input-group">
+                <label>Confirmar</label>
+                <input type="password" name="confirmarPassword" placeholder="••••••••••" required>
+            </div> 
+        </div>
+
+        <button type="submit" class="signup-btn">Crear</button>
+    </form>
+</div>

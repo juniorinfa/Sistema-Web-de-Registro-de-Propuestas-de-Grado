@@ -1,0 +1,23 @@
+<div class="container" style="max-width: 500px">
+    <div class="header">
+        <h1>Iniciar Sesión</h1>
+    </div>
+    <form action="/signin" class="registration-form" method="POST">
+        <div class="form-grid">
+            <div class="input-group full-width">
+                <label>Cédula</label>
+                <input name="username" type="number" placeholder="Cédula" required>
+            </div>
+            <div class="input-group full-width">
+                <label>Contraseña</label>
+                <input name="password" type="password" placeholder="••••••••••" required>
+            </div>
+        </div>
+
+        <button type="submit" class="signup-btn">Iniciar Sesión</button>
+    </form>
+
+    <div class="login-link">
+        ¿Aún no tienes una cuenta? <a href="/signup">Registrarse</a>
+    </div>
+</div>

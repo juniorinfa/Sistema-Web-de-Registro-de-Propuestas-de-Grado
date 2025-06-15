@@ -1,0 +1,61 @@
+<div class="container my-4 p-3 d-flex justify-content-center" style="max-width: 55rem;">
+    <div>
+        <h1 class="text-center mb-4">Bandeja de Solicitudes</h1>
+        <input name="buscador" id="buscador" class="form-control me-2" type="number" placeholder="Filtrar por Cedula"
+            aria-label="Search" style="max-width: 35rem;">
+    </div>
+</div>
+
+{{#if estudiantes}}
+<div class="container my-4 p-1 userFilter" style="max-width: 55rem;">
+    <div class="d-flex justify-content-between align-items-center mx-2 my-1 etiquetas">
+        <div class="d-flex separacionEstudiantes">
+            <p class="text-secondary">Nombre y Apellido</p>
+        </div>
+        <div class="separacionEstudiantes">
+            <p class="text-secondary userCedula">Cedula</p>
+        </div>
+        <div class="separacionEstudiantes">
+        </div>
+    </div>
+</div>
+
+{{#each estudiantes}}
+<div class="container my-4 p-3" style="max-width: 55rem;">
+    <div class="d-flex justify-content-between align-items-center mx-2 my-1 etiquetas flex-column flex-md-row">
+        <div class="d-flex separacionEstudiantes">
+            <p>{{nombre}} {{apellido}}</p>
+        </div>
+        <div class="separacionEstudiantes">
+            <p class="text-start usuarioCI">{{cedula}}</p>
+        </div>
+        <div class="separacionEstudiantes">
+            <div class="d-flex justify-content-between mx-4">
+                <a href="/links/solicitudAprobada/{{id}}"
+                    class="separacionEstudiantes btn btn-success mx-2 text-decoration-none text-light">Aceptar</a>
+                <a href="/links/solicitudRechazada/{{id}}"
+                    class="separacionEstudiantes btn btn-danger mx-2 text-decoration-none text-light">Rechazar</a>
+            </div>
+        </div>
+    </div>
+</div>
+{{/each}}
+{{else}}
+<div class="container mb-4" style="max-width: 800px">
+    <h2 class="text-center" style="color: #777777;">No hay Solicitudes Pendientes</h2>
+</div>
+{{/if}}
+
+
+<script>
+    document.addEventListener("keyup", e => {
+        if (e.target.matches("#buscador")) {
+            if (e.key === "Escape") e.target.value = ""
+            document.querySelectorAll(".usuarioCI").forEach(filtro => {
+                filtro.textContent.toLowerCase().includes(e.target.value.toLowerCase())
+                    ? filtro.parentNode.parentNode.parentNode.classList.remove("displayNone")
+                    : filtro.parentNode.parentNode.parentNode.classList.add("displayNone")
+            })
+        }
+    })
+</script>

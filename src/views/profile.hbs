@@ -1,0 +1,522 @@
+{{#if (isStudent userType)}}
+{{#if estatus}}
+<div class="container" style="max-width: 75rem">
+    <h1 class="text-center">Bienvenido {{user.nombre}} {{user.apellido}}</h1>
+    <a href="links/titulos"><button type="submit" class="signup-btn btnExtended" style="font-size: 2rem;">Titulos del
+            Proyecto</button></a>
+    <a href="links/capitulos"><button type="submit" class="signup-btn btnExtended" style="font-size: 2rem;">Capitulos
+            del Proyecto</button></a>
+</div>
+{{else}}
+<div class="container mb-4 d-flex justify-content-center" style="max-width: 800px">
+    <h2 class="text-center" style="color: #777777;">Esperando la Aceptacion del Docente</h2>
+</div>
+{{/if}}
+{{/if}}
+
+{{#if (combinados userType)}}
+{{#if (isAdmin userType)}}
+
+<div class="container my-2 p-4 d-flex justify-content-center flex-column flex-md-row" style="max-width: 75rem;">
+    <div style="width: 100%;">
+        <input name="buscador" id="buscador" class="form-control mx-2" type="number" placeholder="Filtrar por Cedula"
+            aria-label="Search" style="max-width: 35rem;">
+    </div>
+    <div style="width: 100%;">
+        <form action="links/cambioSeccion" class="d-flex" method="POST">
+            <select name="seccion" id="" class="form-control mx-3">
+                <option value="M01">Cambiar a Sección M01</option>
+                <option value="M02">Cambiar a Sección M02</option>
+                <option value="T01">Cambiar a Sección T01</option>
+                <option value="T02">Cambiar a Sección T02</option>
+                <option value="F01">Cambiar a Sección F01</option>
+                <option value="F02">Cambiar a Sección F02</option>
+                <option value="SP01">Cambiar a Sección SP01</option>
+                <option value="SP02">Cambiar a Sección SP02</option>
+            </select>
+            <button type="submit" class="btn btn-light">Cambiar</button>
+        </form>
+    </div>
+</div>
+{{/if}}
+{{#if (isTeacher userType)}}
+<div class="container my-2 p-4 d-flex justify-content-center" style="max-width: 75rem;">
+    <input name="buscador" id="buscador" class="form-control mx-2" type="number" placeholder="Filtrar por Cedula"
+        aria-label="Search" style="max-width: 35rem;">
+</div>
+{{/if}}
+{{#if estudiantes}}
+<div class="container pb-2" style="max-width: 75rem">
+    <div class="d-flex justify-content-between flex-column flex-md-row">
+        <div>
+            <h6 class="text-center">Titulos Aprobados</h6>
+            <h6 class="text-center">{{totalTitulos}}/{{totalEstudiantes}}</h6>
+            <div class="canvas">
+                <canvas id="myChart1"></canvas>
+            </div>
+            <h6 class="text-center">{{estadisticaTitulo}}%</h6>
+        </div>
+        <div>
+            <h6 class="text-center">Capitulo I</h6>
+            <h6 class="text-center">{{totalCapI}}/{{totalEstudiantes}}</h6>
+            <div class="canvas">
+                <canvas id="myChart2"></canvas>
+            </div>
+            <h6 class="text-center">{{estadisticaCapI}}%</h6>
+        </div>
+        <div>
+            <h6 class="text-center">Capitulo II</h6>
+            <h6 class="text-center">{{totalCapII}}/{{totalEstudiantes}}</h6>
+            <div class="canvas">
+                <canvas id="myChart3"></canvas>
+            </div>
+            <h6 class="text-center">{{estadisticaCapII}}%</h6>
+        </div>
+        <div>
+            <h6 class="text-center">Capitulo III</h6>
+            <h6 class="text-center">{{totalCapIII}}/{{totalEstudiantes}}</h6>
+            <div class="canvas">
+                <canvas id="myChart4"></canvas>
+            </div>
+            <h6 class="text-center">{{estadisticaCapIII}}%</h6>
+        </div>
+    </div>
+    <div class="">
+        <button onclick="downloadPDF()" class="btn btn-light descargarEstadisticas"><i
+                class="fa-solid fa-download"></i></button>
+    </div>
+</div>
+<div class="container my-4 p-1 userFilter" style="max-width: 75rem;">
+    <div class="d-flex justify-content-between align-items-center mx-2 my-1 etiquetas">
+        <div class="d-flex separacionEstudiantes">
+            <p class="text-secondary">Nombre y Apellido</p>
+        </div>
+        <div class="separacionEstudiantes">
+            <p class="text-secondary userCedula">Cedula</p>
+        </div>
+        <div class="separacionEstudiantes">
+        </div>
+    </div>
+</div>
+
+{{#each estudiantes}}
+<div class="container my-4 p-3" style="max-width: 75rem;">
+    <div class="d-flex justify-content-between align-items-center mx-2 my-1 etiquetas flex-column flex-md-row">
+        <div class="d-flex separacionEstudiantes">
+            <p>{{nombre}} {{apellido}}</p>
+        </div>
+        <div class="separacionEstudiantes">
+            <p class="text-start usuarioCI">{{cedula}}</p>
+        </div>
+        <div class="separacionEstudiantes">
+            <div class="d-flex justify-content-between mx-4">
+                <a href="links/titulosProfesor/{{id}}"
+                    class="separacionEstudiantes btn btn-primary mx-2 text-decoration-none text-light">Titulos</a>
+                <a href="links/capitulosProfesor/{{id}}"
+                    class="separacionEstudiantes btn btn-success mx-2 text-decoration-none text-light">Capitulos</a>
+                <a href="/deleteUser/{{id}}"
+                    class="separacionEstudiantes btn btn-danger mx-2 text-decoration-none text-light">Eliminar</a> 
+            </div>
+        </div>
+    </div>
+</div>
+{{/each}}
+{{else}}
+<div class="container mb-4 d-flex justify-content-center" style="max-width: 800px">
+    <h2 class="text-center" style="color: #777777;">No hay Estudiante Aun</h2>
+</div>
+{{/if}}
+{{/if}}
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.2/jspdf.debug.js"></script>
+
+<script>
+    document.addEventListener("keyup", e => {
+        if (e.target.matches("#buscador")) {
+            if (e.key === "Escape") e.target.value = ""
+            document.querySelectorAll(".usuarioCI").forEach(filtro => {
+                filtro.textContent.toLowerCase().includes(e.target.value.toLowerCase())
+                    ? filtro.parentNode.parentNode.parentNode.classList.remove("displayNone")
+                    : filtro.parentNode.parentNode.parentNode.classList.add("displayNone")
+            })
+        }
+    })
+
+    const ctx1 = document.getElementById('myChart1');
+    const ctx2 = document.getElementById('myChart2');
+    const ctx3 = document.getElementById('myChart3');
+    const ctx4 = document.getElementById('myChart4');
+
+    var porcentaje1 = {{ estadisticaTitulo }};
+    var resto1 = 100 - porcentaje1;
+    var porcentaje2 = {{ estadisticaCapI }};
+    var resto2 = 100 - porcentaje2;
+    var porcentaje3 = {{ estadisticaCapII }};
+    var resto3 = 100 - porcentaje3;
+    var porcentaje4 = {{ estadisticaCapIII }};
+    var resto4 = 100 - porcentaje4;
+
+    const dataPorcentaje1 = 'Aprobados '+porcentaje1+'%';
+    const dataResto1 = 'Sin Enviar '+resto1+'%';
+    const dataPorcentaje2 = 'Entregados '+porcentaje2+'%';
+    const dataResto2 = 'Sin Entregar '+resto2+'%';
+    const dataPorcentaje3 = 'Enviados '+porcentaje3+'%';
+    const dataResto3 = 'Sin Enviar '+resto3+'%';
+    const dataPorcentaje4 = 'Enviados '+porcentaje4+'%';
+    const dataResto4 = 'Sin Enviar '+resto4+'%';
+
+    new Chart(ctx1, {
+        type: 'pie',
+        data: {
+            labels: [dataPorcentaje1, dataResto1],
+            datasets: [{
+                data: [porcentaje1, resto1],
+                borderWidth: 2,
+                backgroundColor: ['#ff5e00c0', '#dadada']
+            }]
+        },
+        options: {
+            plugins: {
+                // 1. Ocultar la leyenda
+                legend: {
+                    display: false
+                },
+                // 2. Personalizar los tooltips
+                tooltip: {
+                    callbacks: {
+                        label: function (context) {
+                            // Usar las etiquetas definidas en data.labels
+                            return context.label;
+                        },
+                        // Opcional: Eliminar el título (si no se necesita)
+                        title: () => null
+                    }
+                }
+            },
+            // 3. Deshabilitar eventos en elementos no deseados (opcional)
+            interaction: {
+                intersect: false,
+                mode: 'index'
+            }
+        }
+    });
+    new Chart(ctx2, {
+        type: 'pie',
+        data: {
+            labels: [dataPorcentaje2, dataResto2],
+            datasets: [{
+                data: [porcentaje2, resto2],
+                borderWidth: 2,
+                backgroundColor: ['#ff5e00c0', '#dadada']
+            }]
+        },
+        options: {
+            plugins: {
+                // 1. Ocultar la leyenda
+                legend: {
+                    display: false
+                },
+                // 2. Personalizar los tooltips
+                tooltip: {
+                    callbacks: {
+                        label: function (context) {
+                            // Usar las etiquetas definidas en data.labels
+                            return context.label;
+                        },
+                        // Opcional: Eliminar el título (si no se necesita)
+                        title: () => null
+                    }
+                }
+            },
+            // 3. Deshabilitar eventos en elementos no deseados (opcional)
+            interaction: {
+                intersect: false,
+                mode: 'index'
+            }
+        }
+
+    });
+    new Chart(ctx3, {
+        type: 'pie',
+        data: {
+            labels: [dataPorcentaje3, dataResto3],
+            datasets: [{
+                data: [porcentaje3, resto3],
+                borderWidth: 2,
+                backgroundColor: ['#ff5e00c0', '#dadada']
+            }]
+        },
+        options: {
+            plugins: {
+                // 1. Ocultar la leyenda
+                legend: {
+                    display: false
+                },
+                // 2. Personalizar los tooltips
+                tooltip: {
+                    callbacks: {
+                        label: function (context) {
+                            // Usar las etiquetas definidas en data.labels
+                            return context.label;
+                        },
+                        // Opcional: Eliminar el título (si no se necesita)
+                        title: () => null
+                    }
+                }
+            },
+            // 3. Deshabilitar eventos en elementos no deseados (opcional)
+            interaction: {
+                intersect: false,
+                mode: 'index'
+            }
+        }
+
+    });
+    new Chart(ctx4, {
+        type: 'pie',
+        data: {
+            labels: [dataPorcentaje4, dataResto4],
+            datasets: [{
+                data: [porcentaje4, resto4],
+                borderWidth: 2,
+                backgroundColor: ['#ff5e00c0', '#dadada']
+            }]
+        },
+        options: {
+            plugins: {
+                // 1. Ocultar la leyenda
+                legend: {
+                    display: false
+                },
+                // 2. Personalizar los tooltips
+                tooltip: {
+                    callbacks: {
+                        label: function (context) {
+                            // Usar las etiquetas definidas en data.labels
+                            return context.label;
+                        },
+                        // Opcional: Eliminar el título (si no se necesita)
+                        title: () => null
+                    }
+                }
+            },
+            // 3. Deshabilitar eventos en elementos no deseados (opcional)
+            interaction: {
+                intersect: false,
+                mode: 'index'
+            }
+        }
+
+    });
+</script>
+
+<script>
+
+    var totalTitulos = {{totalTitulos}};
+    var totalEstudiantes = {{totalEstudiantes}};
+    var totalCapI = {{totalCapI}};
+    var totalCapII = {{totalCapII}};
+    var totalCapIII = {{totalCapIII}};
+
+    var seccionReport; 
+
+    switch ({{seccion}}) {
+		case 1:
+			seccionReport = 'M01';
+			break;
+		case 2:
+			seccionReport = 'M02';
+			break;
+		case 3:
+			seccionReport = 'T01';
+			break;
+		case 4:
+			seccionReport = 'T02';
+			break;
+        case 5:
+			seccionReport = 'F01';
+			break;
+		case 6:
+			seccionReport = 'F02';
+			break;
+		case 7:
+			seccionReport = 'SP01';
+			break;
+		case 8:
+			seccionReport = 'SP02';
+			break;
+	}
+
+    const bgColor = {
+        id: 'bgColor',
+        beforeDraw: (chart, options) => {
+            const { ctx, width, height } = chart;
+            ctx.fillStyle = 'white';
+            ctx.fillRect(0, 0, width, height);
+            ctx.restore();
+        }
+    }
+
+    // config 
+    const config = {
+        type: 'pie',
+        data,
+        options: {
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            }
+        },
+        plugins: [bgColor]
+    };
+
+    // render init block
+    const myChart = new Chart(
+        document.getElementById('myChart1'),
+        document.getElementById('myChart2'),
+        document.getElementById('myChart3'),
+        document.getElementById('myChart4'),
+        config
+    );
+
+    function downloadPDF() {
+        const canvas1 = document.getElementById('myChart1');
+        const canvas2 = document.getElementById('myChart2');
+        const canvas3 = document.getElementById('myChart3');
+        const canvas4 = document.getElementById('myChart4');
+
+        const canvasImage1 = canvas1.toDataURL('image/png', 1.0);
+        const canvasImage2 = canvas2.toDataURL('image/png', 1.0);
+        const canvasImage3 = canvas3.toDataURL('image/png', 1.0);
+        const canvasImage4 = canvas4.toDataURL('image/png', 1.0);
+
+        let pdf = new jsPDF();
+
+        const now = new Date();
+        const options = { 
+        year: 'numeric', 
+        month: 'long', 
+        day: 'numeric',
+        hour: '2-digit',
+        minute: '2-digit',
+        second: '2-digit',
+        hour12: true // Formato 12 horas (AM/PM)
+        };
+
+        const fechaHora = now.toLocaleString('es-ES', options); 
+
+        pdf.setFont("helvetica", "bold");
+
+        pdf.setFontSize(24).text('Reporte Actualizado de Entregas', 42, 20);
+        pdf.setFontSize(12).text(`Seccion ${seccionReport}: ${fechaHora}`, 62, 27);
+
+        pdf.setFontSize(16).text('Estadisticas Titulos', 32, 54);
+        pdf.setFontSize(10).text(`${totalTitulos} Titulos Aprobados de ${totalEstudiantes} Estudiantes.`, 25, 63);
+        pdf.setFontSize(10).text(`${porcentaje1}% de Titulos Aprobados.`, 40, 125);
+        pdf.setFontSize(10).text(`${resto1}% de Titulos Sin Evaluar.`, 40, 135);
+
+        pdf.setFillColor(255, 133, 63); // RGB para naranja
+        pdf.rect(
+        27,   // Posición X (desde la izquierda)
+        121,   // Posición Y (desde la parte superior)
+        10,   // Ancho del cuadrado
+        5,   // Alto del cuadrado (igual al ancho para hacer cuadrado)
+        'F'   // 'F' = Fill (rellenar)
+        );
+
+        pdf.setFillColor(218, 218, 218); // RGB para naranja
+        pdf.rect(
+        27,   // Posición X (desde la izquierda)
+        131,   // Posición Y (desde la parte superior)
+        10,   // Ancho del cuadrado
+        5,   // Alto del cuadrado (igual al ancho para hacer cuadrado)
+        'F'   // 'F' = Fill (rellenar)
+        );
+
+        pdf.addImage(canvasImage1, 'PNG', 35, 70, 45, 45);
+
+
+        pdf.setFontSize(16).text('Estadisticas Capitulo I', 122, 54);
+        pdf.setFontSize(10).text(`${totalCapI} Capitulos Entregados de ${totalEstudiantes} Estudiantes.`, 118, 63);
+        pdf.setFontSize(10).text(`${porcentaje2}% de Capitulos Recividos.`, 135, 125);
+        pdf.setFontSize(10).text(`${resto2}% de Capitulos Sin Evaluar.`, 135, 135);
+
+        pdf.setFillColor(255, 133, 63); // RGB para naranja
+        pdf.rect(
+        120,   // Posición X (desde la izquierda)
+        121,   // Posición Y (desde la parte superior)
+        10,   // Ancho del cuadrado
+        5,   // Alto del cuadrado (igual al ancho para hacer cuadrado)
+        'F'   // 'F' = Fill (rellenar)
+        );
+
+        pdf.setFillColor(218, 218, 218); // RGB para naranja
+        pdf.rect(
+        120,   // Posición X (desde la izquierda)
+        131,   // Posición Y (desde la parte superior)
+        10,   // Ancho del cuadrado
+        5,   // Alto del cuadrado (igual al ancho para hacer cuadrado)
+        'F'   // 'F' = Fill (rellenar)
+        );
+
+        pdf.addImage(canvasImage2, 'PNG', 130, 70, 45, 45);
+
+
+        pdf.setFontSize(16).text('Estadisticas Capitulo II', 28, 169);
+        pdf.setFontSize(10).text(`${totalCapII} Capitulos Entregados de ${totalEstudiantes} Estudiantes.`, 23, 178);
+        pdf.setFontSize(10).text(`${porcentaje3}% de Capitulos Recividos.`, 40, 240);
+        pdf.setFontSize(10).text(`${resto3}% de Capitulos Sin Evaluar.`, 40, 250);
+
+        pdf.setFillColor(255, 133, 63); // RGB para naranja
+        pdf.rect(
+        27,   // Posición X (desde la izquierda)
+        237,   // Posición Y (desde la parte superior)
+        10,   // Ancho del cuadrado
+        5,   // Alto del cuadrado (igual al ancho para hacer cuadrado)
+        'F'   // 'F' = Fill (rellenar)
+        );
+
+        pdf.setFillColor(218, 218, 218); // RGB para naranja
+        pdf.rect(
+        27,   // Posición X (desde la izquierda)
+        247,   // Posición Y (desde la parte superior)
+        10,   // Ancho del cuadrado
+        5,   // Alto del cuadrado (igual al ancho para hacer cuadrado)
+        'F'   // 'F' = Fill (rellenar)
+        );
+
+        pdf.addImage(canvasImage3, 'PNG', 35, 185, 45, 45);
+
+
+        pdf.setFontSize(16).text('Estadisticas Capitulo III', 122, 169);
+        pdf.setFontSize(10).text(`${totalCapIII} Capitulos Entregados de ${totalEstudiantes} Estudiantes.`, 118, 178);
+        pdf.setFontSize(10).text(`${porcentaje4}% de Capitulos Recividos.`, 135, 240);
+        pdf.setFontSize(10).text(`${resto4}% de Capitulos Sin Evaluar.`, 135, 250);
+
+        pdf.setFillColor(255, 133, 63); // RGB para naranja
+        pdf.rect(
+        120,   // Posición X (desde la izquierda)
+        237,   // Posición Y (desde la parte superior)
+        10,   // Ancho del cuadrado
+        5,   // Alto del cuadrado (igual al ancho para hacer cuadrado)
+        'F'   // 'F' = Fill (rellenar)
+        );
+
+        pdf.setFillColor(218, 218, 218); // RGB para naranja
+        pdf.rect(
+        120,   // Posición X (desde la izquierda)
+        247,   // Posición Y (desde la parte superior)
+        10,   // Ancho del cuadrado
+        5,   // Alto del cuadrado (igual al ancho para hacer cuadrado)
+        'F'   // 'F' = Fill (rellenar)
+        );
+
+
+        pdf.addImage(canvasImage4, 'PNG', 130, 185, 45, 45);
+        pdf.save(`Reporte de estadisticas seccion ${seccionReport}.pdf`);
+
+    };
+</script>

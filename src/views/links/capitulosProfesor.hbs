@@ -1,0 +1,110 @@
+<div class="container mb-4 p-3" style="max-width: 800px">
+    <h2 class="text-center">{{usuarios.nombre}} {{usuarios.apellido}}</h2>
+    <h6 class="text-center">C.I: {{usuarios.cedula}}</h6>
+</div>
+
+<div style="width: 100%">
+    <div>
+        <div class="container mb-4" style="max-width: 800px">
+            <div class="header">
+                <h2 class="text-center">Capitulo I</h2>
+            </div>
+            {{#if capituloI}}
+            <a href="http://localhost:4000/uploads/{{capituloI.capitulo}}" target="_blank"
+                style="text-decoration: none;">
+                <div class="drop-zone">
+                    <i class="fa-solid fa-file"></i>
+                    <p class="archivoName">{{capituloI.originalname}}</p>
+                </div>
+            </a>
+            {{#each comentariosI}}
+            <div class="comment">
+                <p style="overflow-wrap: break-word;">{{comentarios}}</p>
+                <div>
+                    <a href="/links/deleteComment/{{id}}" class="eliminarComentario text-danger"><i class="fa-solid fa-x"></i></a>
+                </div>
+            </div>    
+            {{/each}}        
+            <form action="/links/capitulosProfesor/{{capituloI.id}}" method="POST">
+                <div class="d-flex">
+                    <textarea class="textarea" name="comentarios" id="" placeholder="Escribir un comentario..."style="resize: none"></textarea>
+                    <button type="submit" class="btnTexarea">Enviar</button>
+                </div>
+            </form>
+
+            {{else}}
+            <div class="sinArchivos" style="cursor: default;">
+                <p class="text-secondary">Sin Archivos Adjuntado</p>
+            </div>
+            {{/if}}
+        </div>
+
+        <div class="container mb-4" style="max-width: 800px">
+            <div class="header">
+                <h2 class="text-center">Capitulo II</h2>
+            </div>
+            {{#if capituloII}}
+            <a href="http://localhost:4000/uploads/{{capituloII.capitulo}}" target="_blank"
+                style="text-decoration: none;">
+                <div class="drop-zone">
+                    <i class="fa-solid fa-file"></i>
+                    <p class="archivoName">{{capituloII.originalname}}</p>
+                </div>
+            </a>
+            {{#each comentariosII}}
+            <div class="comment">
+                <p style="overflow-wrap: break-word;">{{comentarios}}</p>
+                <a href="/links/deleteComment/{{id}}" class="eliminarComentario text-danger"><i class="fa-solid fa-x"></i></a>
+
+            </div>    
+            {{/each}}        
+            <form action="/links/capitulosProfesor/{{capituloII.id}}" method="POST">
+                <div class="d-flex">
+                    <textarea class="textarea" name="comentarios" id="" placeholder="Escribir un comentario..."style="resize: none"></textarea>
+                    <button type="submit" class="btnTexarea">Enviar</button>
+                </div>
+            </form>
+
+            {{else}}
+            <div class="sinArchivos" style="cursor: default;">
+                <p class="text-secondary">Sin Archivos Adjuntado</p>
+            </div>
+            {{/if}}
+        </div>
+
+        <div class="container mb-4" style="max-width: 800px">
+            <div class="header">
+                <h2 class="text-center">Capitulo III</h2>
+            </div>
+            {{#if capituloIII}}
+            <a href="http://localhost:4000/uploads/{{capituloIII.capitulo}}" target="_blank"
+                style="text-decoration: none;">
+                <div class="drop-zone">
+                    <i class="fa-solid fa-file"></i>
+                    <p class="archivoName">{{capituloIII.originalname}}</p>
+                </div>
+            </a>
+            {{#each comentariosIII}}
+            <div class="comment">
+                <p style="overflow-wrap: break-word;">{{comentarios}}</p>
+                <a href="/links/deleteComment/{{id}}" class="eliminarComentario text-danger"><i class="fa-solid fa-x"></i></a>
+
+            </div>    
+            {{/each}}        
+            <form action="/links/capitulosProfesor/{{capituloIII.id}}" method="POST">
+                <div class="d-flex">
+                    <textarea class="textarea" name="comentarios" id="" placeholder="Escribir un comentario..."style="resize: none"></textarea>
+                    <button type="submit" class="btnTexarea">Enviar</button>
+                </div>
+            </form>
+
+            {{else}}
+            <div class="sinArchivos" style="cursor: default;">
+                <p class="text-secondary">Sin Archivos Adjuntado</p>
+            </div>
+            {{/if}}
+        </div>
+
+
+    </div>
+</div>

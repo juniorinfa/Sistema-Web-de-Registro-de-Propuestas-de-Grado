@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registrarse</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="../../public/css/styles.css">
+</head>
+<body>
+    <div class="container" style="max-width: 500px">
+        <div class="header">
+            <h1>Crear Cuenta</h1>
+            <p>Crea una cuenta para acceder al sistema Proyecto de Grado</p>
+        </div>
+        
+        <form class="registration-form">
+            <div class="form-grid">
+                <div class="input-group">
+                    <label>Nombre</label>
+                    <input type="text" placeholder="Nombre" required>
+                </div>
+                <div class="input-group">
+                    <label>Apellido</label>
+                    <input type="text" placeholder="Apellido" required>
+                </div>
+                <div class="input-group full-width">
+                    <label>Cédula</label>
+                    <input type="number" placeholder="Cédula" required>
+                </div>
+                <div class="input-group full-width">
+                    <label>Email</label>
+                    <input type="email" placeholder="Email" required>
+                </div>
+                <div class="input-group full-width">
+                    <label>Telefono</label>
+                    <input type="tel" placeholder="Telefono" required>
+                </div>
+                <div class="input-group full-width">
+                    <label>Sección</label>
+                    <select required>
+                        <option value="">Sección</option>
+                        <option value="A">Sección M01</option>
+                        <option value="B">Sección T02</option>
+                        <option value="C">Sección SP03</option>
+                    </select>
+                </div>
+                <div class="input-group">
+                    <label>Contraseña</label>
+                    <input type="password" placeholder="••••••••••" required>
+                </div>
+                <div class="input-group">
+                    <label>Confirmar</label>
+                    <input type="password" placeholder="••••••••••" required>
+                </div>
+            </div>
+
+            <button type="submit" class="signup-btn">Crear</button>
+        </form>
+
+        <div class="login-link">
+        ¿Ya tienes una cuenta? <a href="signin.html">Iniciar Sesión</a>
+        </div>
+    </div>
+</body>
+</html>

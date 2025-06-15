@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>File Upload Interface</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f8f9fa;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+        }
+
+        .upload-container {
+            background-color: white;
+            padding: 2.5rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            text-align: center;
+            width: 400px;
+        }
+
+        .drop-zone {
+            border: 2px dashed #adb5bd;
+            border-radius: 8px;
+            padding: 2rem 1rem;
+            margin: 1.5rem 0;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .drop-zone:hover {
+            border-color: #4dabf7;
+            background-color: #f8f9fa;
+        }
+
+        .instruction-text {
+            color: #495057;
+            font-size: 1rem;
+            line-height: 1.5;
+            margin-bottom: 1rem;
+        }
+
+        .separator {
+            display: flex;
+            align-items: center;
+            color: #868e96;
+            margin: 1.5rem 0;
+        }
+
+        .separator::before,
+        .separator::after {
+            content: "";
+            flex: 1;
+            border-bottom: 1px solid #dee2e6;
+            margin: 0 0.5rem;
+        }
+
+        .browse-btn {
+            background-color: #4dabf7;
+            color: white;
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 6px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .browse-btn:hover {
+            background-color: #339af0;
+        }
+
+        .branding {
+            margin-top: 2rem;
+            color: #868e96;
+            font-size: 0.875rem;
+            letter-spacing: 1px;
+        }
+
+        .branding span:first-child {
+            font-weight: 300;
+        }
+
+        .branding span:last-child {
+            font-weight: 700;
+        }
+
+        #file-input {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="upload-container">
+        <div class="drop-zone" onclick="document.getElementById('file-input').click()">
+            <div class="instruction-text">
+                Drag your documents, photos, or<br>
+                videos here to start uploading.
+            </div>
+        </div>
+
+        <div class="separator">OR</div>
+
+        <button class="browse-btn" onclick="document.getElementById('file-input').click()">
+            Browse files
+        </button>
+
+        <div class="branding">
+            <span>Xd</span>  
+            <span>XD</span>
+        </div>
+
+        <input type="file" id="file-input" multiple hidden>
+    </div>
+</body>
+</html>

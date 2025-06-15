@@ -1,0 +1,86 @@
+<style>
+    #response {
+        margin-top: 20px;
+        padding: 10px;
+        min-height: 50px;
+    }
+
+    #response h3 {
+        color: #333;
+        font-size: 1.2em;
+    }
+
+    #response strong {
+        color: #1d1d1d;
+    }
+
+    #response ul {
+        padding-left: 20px;
+    }
+
+    #response li {
+        margin-bottom: 5px;
+    }
+
+</style>
+
+<div class="container py-4 mb-4">
+    <h2 class="text-center">Busqueda con Inteligencia Artificial</h2>
+</div>
+
+<div class="container py-2">
+    <div class="form-group d-flex mt-3">
+        <input type="text" class="textarea" id="userInput" placeholder="Buscar..." />
+        <button class="btnTexarea" onclick="sendMessage()">Buscar</button>
+    </div>
+    <div class="d-flex justify-content-center my-3">
+        <div id="response" style="max-width: 55rem;">
+            <p>Buscar Informacion</p>
+        </div>
+    </div>
+</div>
+<script>
+    const inputBtn = document.getElementById('userInput');
+    async function sendMessage() {
+        const input = document.getElementById('userInput').value;
+        const responseDiv = document.getElementById('response');
+        if (!input) {
+            responseDiv.innerHTML = 'Por favor Introduzca un Mensaje.';
+            return;
+        }
+        responseDiv.innerHTML = 'Buscando...';
+        try {
+            const response = await fetch(
+                'https://openrouter.ai/api/v1/chat/completions',
+                {
+                    method: 'POST',
+                    headers: {
+                        Authorization: 'Bearer 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',
+                        'HTTP-Referer': 'https://www.sitename.com',
+                        'X-Title': 'Proyecto de Grado',
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        model: 'deepseek/deepseek-r1-0528:free',
+                        messages: [{ role: 'user', content: input }],
+                    }),
+                },
+            );
+            const data = await response.json();
+            console.log(data);
+            const markdownText =
+                data.choices?.[0]?.message?.content || 'Sin respuesta Recivida.';
+            responseDiv.innerHTML = marked.parse(markdownText);
+        } catch (error) {
+            responseDiv.innerHTML = 'Error: ' + error.message;
+        }
+    }
+
+    inputBtn.addEventListener('keypress', (e) => {
+        if (e.key === 'Enter') {
+            sendMessage();
+            inputBtn.value = '';
+            inputBtn.reset();
+        }
+    });
+</script>
