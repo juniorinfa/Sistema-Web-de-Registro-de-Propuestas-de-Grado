@@ -1,33 +1,39 @@
 <div style="width: 100%">
     <div class="container mb-5" style="max-width: 800px">
         <div class="header">
-            <h1>Titulos de Propuestas de Grado</h1>
+            <h1>Títulos de Propuestas de Grado</h1>
         </div>
         <form action="/links/titulos" class="registration-form" method="POST">
             <div class="mb-4">
                 <div class="input-group full-width">
                     <label>Titulo</label>
-                    <input type="text" name="titulo" placeholder="Titulo" autofocus required>
+                    <select name="num_titulos" id="">
+                        <option value="TituloI">Título I</option>
+                        <option value="TituloII">Título II</option>
+                        <option value="TituloIII">Título III</option>
+                    </select>
+                    <input type="text" name="titulo" placeholder="Título" autofocus required>
+                    <textarea class="textarea" name="comentarios" id="" placeholder="Escribir un comentario..." style="resize: none; height: 150px"></textarea>
                 </div>
-                <button type="submit" class="signup-btn">Guardar Titulo</button>
+                <button type="submit" class="signup-btn">Guardar Título</button>
             </div>
         </form>
     </div>
 
-    {{#each titulos}}
+    {{#if tituloI}}
     <div class="container mb-4" style="max-width: 800px">
         <div class="header d-flex justify-content-between">
-            <h2>Titulo {{add @index 1}}</h2>
+            <h2>Título I</h2>
 
             <div class="d-flex">
 
-                {{#if estatus}}
+                {{#if tituloI.estatus}}
                 <div class="btn btn-success btn-sm mt-2 text-decoration-none d-flex align-items-center px-2">
-                    {{estatus}}
+                    {{tituloI.estatus}}
                 </div>
                 {{else}}
                 <div>
-                    <a href="/links/delete/{{id}}"
+                    <a href="/links/delete/{{tituloI.id}}"
                         class="btn btn-danger btn-sm mt-2 text-decoration-none d-flex align-items-center px-2">X</a>
                 </div>
                 {{/if}}
@@ -35,11 +41,114 @@
             </div>
 
         </div>
-        <p class="h6 text-uppercase text-center">{{titulo}}</p>
+        <p class="h4 text-uppercase text-center" style="overflow-wrap: break-word; word-break: break-word;">{{tituloI.titulo}}</p>
+        <p class="text-uppercase text-center mt-5" style="overflow-wrap: break-word; word-break: break-word;">{{tituloI.comentarios}}</p>
+
+        {{#each comentariosI}}
+            <div class="comment">
+                <p style="overflow-wrap: break-word;">{{comentarios}}</p>
+            </div>    
+            
+        {{else}}    
+            <div class="comment">
+                <p class="text-secondary">Sin Comentarios</p>
+            </div>
+        {{/each}}
+        </div>
+
     </div>
     {{else}}
     <div class="container mb-4" style="max-width: 800px">
-        <h2 class="text-center" style="color: #777777;">No hay Titulos Creados Aún</h2>
+        <h2 class="text-center" style="color: #777777;">Sin Titulo I</h2>
     </div>
-    {{/each}}
+    {{/if}}
+
+    {{#if tituloII}}
+    <div class="container mb-4" style="max-width: 800px">
+        <div class="header d-flex justify-content-between">
+            <h2>Título II</h2>
+
+            <div class="d-flex">
+
+                {{#if tituloII.estatus}}
+                <div class="btn btn-success btn-sm mt-2 text-decoration-none d-flex align-items-center px-2">
+                    {{tituloII.estatus}}
+                </div>
+                {{else}}
+                <div>
+                    <a href="/links/delete/{{tituloII.id}}"
+                        class="btn btn-danger btn-sm mt-2 text-decoration-none d-flex align-items-center px-2">X</a>
+                </div>
+                {{/if}}
+
+            </div>
+
+        </div>
+        <p class="h4 text-uppercase text-center" style="overflow-wrap: break-word; word-break: break-word;">{{tituloII.titulo}}</p>
+        <p class="text-uppercase text-center mt-5"  style="overflow-wrap: break-word; word-break: break-word;">{{tituloII.comentarios}}</p>
+
+        {{#each comentariosII}}
+            <div class="comment">
+                <p style="overflow-wrap: break-word;">{{comentarios}}</p>
+            </div>    
+            
+        {{else}}    
+            <div class="comment">
+                <p class="text-secondary">Sin Comentarios</p>
+            </div>
+        {{/each}}
+
+    </div>
+    {{else}}
+    <div class="container mb-4" style="max-width: 800px">
+        <h2 class="text-center" style="color: #777777;">Sin Titulo II</h2>
+    </div>
+    {{/if}}
+
+    {{#if tituloIII}}
+    <div class="container mb-4" style="max-width: 800px">
+        <div class="header d-flex justify-content-between">
+            <h2>Título III</h2>
+
+            <div class="d-flex">
+
+                {{#if tituloIII.estatus}}
+                <div class="btn btn-success btn-sm mt-2 text-decoration-none d-flex align-items-center px-2">
+                    {{tituloIII.estatus}}
+                </div>
+                {{else}}
+                <div>
+                    <a href="/links/delete/{{tituloIII.id}}"
+                        class="btn btn-danger btn-sm mt-2 text-decoration-none d-flex align-items-center px-2">X</a>
+                </div>
+                {{/if}}
+
+            </div>
+
+        </div>
+        <p class="h6 text-uppercase text-center" style="overflow-wrap: break-word; word-break: break-word;">{{tituloIII.titulo}}</p>
+        <p class="text-uppercase text-center mt-5" style="overflow-wrap: break-word; word-break: break-word;">{{tituloIII.comentarios}}</p>
+
+        {{#each comentariosIII}}
+            <div class="comment">
+                <p style="overflow-wrap: break-word;">{{comentarios}}</p>
+            </div>    
+            
+        {{else}}    
+            <div class="comment">
+                <p class="text-secondary">Sin Comentarios</p>
+            </div>
+        {{/each}}
+
+
+    </div>
+    {{else}}
+    <div class="container mb-4" style="max-width: 800px">
+        <h2 class="text-center" style="color: #777777;">Sin Titulo III</h2>
+    </div>
+    {{/if}}
+
+
+
+
 </div>

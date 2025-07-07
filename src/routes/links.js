@@ -64,29 +64,41 @@ const upload = multer({
 
 // Get y Post de la vista titulos (Vista para agregar titulos).
 router.get('/titulos', isLoggedIn, isNotAnStudentApproved, async (req, res) => {
-    const titulos = await pool.query('SELECT * FROM titulos WHERE usuario_id = ?', [req.user.id]);
-    res.render('links/titulos', { titulos, userType: req.user ? req.user.userType : null});
+    const tituloI = await pool.query('SELECT * FROM titulos WHERE usuario_id = ? AND num_titulos = "TituloI"', [req.user.id]);
+    const tituloII = await pool.query('SELECT * FROM titulos WHERE usuario_id = ? AND num_titulos = "TituloII"', [req.user.id]);
+    const tituloIII = await pool.query('SELECT * FROM titulos WHERE usuario_id = ? AND num_titulos = "TituloIII"', [req.user.id]);
+
+    const comentariosI = await pool.query('SELECT * FROM comentarios WHERE num_cap = "TituloI" AND usuario_id = ?', [req.user.id]);
+    const comentariosII = await pool.query('SELECT * FROM comentarios WHERE num_cap = "TituloII" AND usuario_id = ?', [req.user.id]);
+    const comentariosIII = await pool.query('SELECT * FROM comentarios WHERE num_cap = "TituloIII" AND usuario_id = ?', [req.user.id]);
+
+
+    res.render('links/titulos', { tituloI: tituloI[0], tituloII: tituloII[0], tituloIII: tituloIII[0], comentariosI, comentariosII, comentariosIII, userType: req.user ? req.user.userType : null});
 });
 
 router.post('/titulos', async (req, res) => {
-    const { id } = req.user;
-    const titulos = await pool.query('SELECT * FROM titulos WHERE usuario_id = ?', [id]);
-    const { titulo } = req.body;
-    const titulo_num = titulos.length + 1;
+    const { num_titulos, titulo, comentarios  } = req.body;
 
-    console.log(titulo);
-    if (titulo_num <= 3) {
-        const newTitulo = {
-            titulo,
-            seccion: req.user.seccion,
-            usuario_id: req.user.id
-        };
-        await pool.query('INSERT INTO titulos set ?', [newTitulo]);
-        req.flash('success', 'Titulo Añadido Correctamente');
-    } else {
-        req.flash('danger', 'Limite de Titulos Alcanzado');
+    const newTitle = {
+        titulo,
+        seccion: req.user.seccion,
+        num_titulos,
+        comentarios,
+        usuario_id: req.user.id
     }
 
+    try {
+        const id = await pool.query('SELECT id FROM titulos WHERE num_titulos = ? AND usuario_id = ?', [num_titulos, req.user.id]);
+        if (id.length > 0) {
+            const x = id[0].id;
+            await pool.query('UPDATE titulos set ? WHERE id = ?', [newTitle, x]);
+            req.flash('success', 'Capitulo Actualizado Correctamente');
+        } else {
+            await pool.query('INSERT INTO titulos set ?', [newTitle]);
+            req.flash('success', 'Capitulo Guardado Correctamente');
+        }
+    } catch (error) {
+    }
     res.redirect(req.get('referer'));
 });
 
@@ -94,9 +106,39 @@ router.post('/titulos', async (req, res) => {
 
 router.get('/titulosProfesor/:id', isLoggedIn, async (req, res) => {
     const titulos = await pool.query('SELECT * FROM titulos WHERE usuario_id = ?', [req.params.id]);
+    const tituloI = await pool.query('SELECT * FROM titulos WHERE num_titulos = "TituloI" AND usuario_id = ?', [req.params.id]);
+    const tituloII = await pool.query('SELECT * FROM titulos WHERE num_titulos = "TituloII" AND usuario_id = ?', [req.params.id]);
+    const tituloIII = await pool.query('SELECT * FROM titulos WHERE num_titulos = "TituloIII" AND usuario_id = ?', [req.params.id]);
+    const comentariosI = await pool.query('SELECT * FROM comentarios WHERE num_cap = "TituloI" AND usuario_id = ?', [req.params.id]);
+    const comentariosII = await pool.query('SELECT * FROM comentarios WHERE num_cap = "TituloII" AND usuario_id = ?', [req.params.id]);
+    const comentariosIII = await pool.query('SELECT * FROM comentarios WHERE num_cap = "TituloIII" AND usuario_id = ?', [req.params.id]);
+
     const usuarios = await pool.query('SELECT * FROM usuarios WHERE id = ?', [req.params.id]);
 
-    res.render('links/titulosProfesor', { usuarios: usuarios[0], titulos, userType: req.user ? req.user.userType : null});
+    res.render('links/titulosProfesor', { usuarios: usuarios[0], titulos, tituloI: tituloI[0], tituloII: tituloII[0], tituloIII: tituloIII[0], comentariosI, comentariosII, comentariosIII, userType: req.user ? req.user.userType : null});
+});
+
+router.post('/titulosProfesor/:id', async (req, res) => {
+    const { id } = req.params;
+    const { comentarios } = req.body;
+    const profesor_id = req.user.id; 
+    const datos = await pool.query('SELECT * FROM titulos WHERE id = ?', [id]);
+
+    const newComment = {
+        comentarios,
+        num_cap: datos[0].num_titulos,
+        tipo: 'titulo',
+        usuario_id: datos[0].usuario_id,
+        profesor_id,
+        titulo_id: datos[0].id   
+    }
+
+    console.log(datos)
+
+    await pool.query('INSERT INTO comentarios set ?', [newComment]);
+    
+    req.flash('success', 'Comentario Subido');
+    res.redirect(req.get('referer'));
 });
 
 
@@ -108,8 +150,6 @@ router.get('/capitulos', isLoggedIn, isNotAnStudentApproved, async (req, res) =>
     const comentariosI = await pool.query('SELECT * FROM comentarios WHERE num_cap = "CapituloI" AND usuario_id = ?', [req.user.id]);
     const comentariosII = await pool.query('SELECT * FROM comentarios WHERE num_cap = "CapituloII" AND usuario_id = ?', [req.user.id]);
     const comentariosIII = await pool.query('SELECT * FROM comentarios WHERE num_cap = "CapituloIII" AND usuario_id = ?', [req.user.id]);
-
-    console.log(comentariosI)
 
     res.render('links/capitulos', { comentariosI, comentariosII, comentariosIII, capituloI: capituloI[0], capituloII: capituloII[0], capituloIII: capituloIII[0], userType: req.user ? req.user.userType : null });
 });
@@ -194,9 +234,11 @@ router.get('/solicitudes/:id', isLoggedIn, async (req, res) => {
 
 router.get('/administrar', async (req, res) => {
 
-    const administrar = await pool.query('SELECT * FROM usuarios WHERE userType <> "estudiante" AND id <> ?', [req.user.id]);
+    const administrarEstudiantes = await pool.query('SELECT * FROM usuarios WHERE userType = "estudiante"');
+    const administrarProfesores = await pool.query('SELECT * FROM usuarios WHERE userType = "profesor"');
+    const administrarAdmin = await pool.query('SELECT * FROM usuarios WHERE userType = "administrador" AND id <> ?', [req.user.id]);
 
-    res.render('links/administrar', { administrar, userType: req.user ? req.user.userType : null });
+    res.render('links/administrar', { administrarProfesores, administrarEstudiantes, administrarAdmin, userType: req.user ? req.user.userType : null });
 });
 
 router.get('/chatbot', async (req, res) =>{
@@ -212,6 +254,15 @@ router.get('/chatbot', async (req, res) =>{
 router.get('/delete/:id', async (req, res) => {
     const { id } = req.params;
     await pool.query('DELETE FROM titulos WHERE id = ?', [id]);
+    
+    console.log(req.params);
+
+    try {
+        await pool.query('DELETE FROM comentarios WHERE tipo = "titulo" AND titulo_id = ?', [id]);
+    } catch (error) {
+        
+    }
+
     req.flash('danger', 'Titulo Eliminado');
 
     res.redirect(req.get('referer'));

@@ -3,12 +3,13 @@
     <h6 class="text-center">C.I: {{usuarios.cedula}}</h6>
 </div>
 <div style="width: 100%">
-    {{#each titulos}}
+    {{#if titulos}}
+        {{#if tituloI}}
         <div class="container mb-4" style="max-width: 800px">
             <div class="header d-flex justify-content-between">
-                <h2>Titulo {{add @index 1}}</h2>
-                {{#if estatus}}
-                <div class="btn btn-success btn-sm mt-2 d-flex align-items-center">{{estatus}}</div>
+                <h2>Título I</h2>
+                {{#if tituloI.estatus}}
+                <div class="btn btn-success btn-sm mt-2 d-flex align-items-center">{{tituloI.estatus}}</div>
                 {{else}}
                 <div class="btn btn-secondary btn-sm mt-2 d-flex align-items-center">En espera</div>
                 {{/if}}
@@ -17,15 +18,131 @@
             --}}
 
             </div>
-            <p class="h6 text-uppercase text-center">{{titulo}}</p>
+            <p class="h4 text-uppercase text-center" style="overflow-wrap: break-word; word-break: break-word;">{{tituloI.titulo}}</p>
+            <p class="text-uppercase text-center mt-4 mb-5" style="overflow-wrap: break-word; word-break: break-word;">{{tituloI.comentarios}}</p>
+            
+            {{#each comentariosI}}
+            <div class="comment">
+                <p style="overflow-wrap: break-word;">{{comentarios}}</p>
+                <div>
+                    <a href="/links/deleteComment/{{id}}" class="eliminarComentario text-danger"><i class="fa-solid fa-x"></i></a>
+                </div>
+            </div>    
+            {{/each}}
+
+            <form action="/links/titulosProfesor/{{tituloI.id}}" method="POST">
+                <div class="d-flex mt-5">
+                    <textarea class="textarea" name="comentarios" id="" placeholder="Escribir un comentario..."style="resize: none"></textarea>
+                    <button type="submit" class="btnComment">Enviar</button>
+                </div>
+            </form>
+
+
             <div class="d-flex mt-5">
-                <a href="/links/tituloAprobado/{{id}}" class="btnAprobar d-flex justify-content-center m-2 btn btn-success btn-sm mt-2 text-decoration-none">Aprobar</a>
-                <a href="/links/delete/{{id}}" class="btnRechazar d-flex justify-content-center m-2 btn btn-danger btn-sm mt-2 text-decoration-none">Rechazar</a>
+                
+                {{#if tituloI.estatus}}
+                <div class="btnAprobado d-flex justify-content-center m-2 btn-sm mt-2">Aprobar</div>
+                {{else}}
+                <a href="/links/tituloAprobado/{{tituloI.id}}" class="btnAprobar d-flex justify-content-center m-2 btn btn-success btn-sm mt-2 text-decoration-none">Aprobar</a>
+                {{/if}}
+
+                <a href="/links/delete/{{tituloI.id}}" class="btnRechazar d-flex justify-content-center m-2 btn btn-danger btn-sm mt-2 text-decoration-none">Rechazar</a>
             </div>
         </div>
+        {{/if}}
+
+        {{#if tituloII}}
+        <div class="container mb-4" style="max-width: 800px">
+            <div class="header d-flex justify-content-between">
+                <h2>Título II</h2>
+                {{#if tituloII.estatus}}
+                <div class="btn btn-success btn-sm mt-2 d-flex align-items-center">{{tituloII.estatus}}</div>
+                {{else}}
+                <div class="btn btn-secondary btn-sm mt-2 d-flex align-items-center">En espera</div>
+                {{/if}}
+            {{!--                 
+                <div class="btn btn-success btn-sm mt-2 d-flex align-items-center">Aprobado</div> 
+            --}}
+
+            </div>
+            <p class="h4 text-uppercase text-center" style="overflow-wrap: break-word; word-break: break-word;">{{tituloII.titulo}}</p>
+            <p class="text-uppercase text-center mt-4 mb-5" style="overflow-wrap: break-word; word-break: break-word;">{{tituloII.comentarios}}</p>
+            
+            {{#each comentariosII}}
+            <div class="comment">
+                <p style="overflow-wrap: break-word;">{{comentarios}}</p>
+                <div>
+                    <a href="/links/deleteComment/{{id}}" class="eliminarComentario text-danger"><i class="fa-solid fa-x"></i></a>
+                </div>
+            </div>    
+            {{/each}}
+
+            <form action="/links/titulosProfesor/{{tituloII.id}}" method="POST">
+                <div class="d-flex mt-5">
+                    <textarea class="textarea" name="comentarios" id="" placeholder="Escribir un comentario..."style="resize: none"></textarea>
+                    <button type="submit" class="btnComment">Enviar</button>
+                </div>
+            </form>
+
+
+            <div class="d-flex mt-5">
+                {{#if tituloII.estatus}}
+                <div class="btnAprobado d-flex justify-content-center m-2 btn-sm mt-2">Aprobar</div>
+                {{else}}
+                <a href="/links/tituloAprobado/{{tituloI.id}}" class="btnAprobar d-flex justify-content-center m-2 btn btn-success btn-sm mt-2 text-decoration-none">Aprobar</a>
+                {{/if}}
+                <a href="/links/delete/{{tituloII.id}}" class="btnRechazar d-flex justify-content-center m-2 btn btn-danger btn-sm mt-2 text-decoration-none">Rechazar</a>
+            </div>
+        </div>
+        {{/if}}
+
+        {{#if tituloIII}}
+        <div class="container mb-4" style="max-width: 800px">
+            <div class="header d-flex justify-content-between">
+                <h2>Título III</h2>
+                {{#if tituloIII.estatus}}
+                <div class="btn btn-success btn-sm mt-2 d-flex align-items-center">{{tituloIII.estatus}}</div>
+                {{else}}
+                <div class="btn btn-secondary btn-sm mt-2 d-flex align-items-center">En espera</div>
+                {{/if}}
+            {{!--                 
+                <div class="btn btn-success btn-sm mt-2 d-flex align-items-center">Aprobado</div> 
+            --}}
+
+            </div>
+            <p class="h4 text-uppercase text-center" style="overflow-wrap: break-word; word-break: break-word;">{{tituloIII.titulo}}</p>
+            <p class="text-uppercase text-center mt-4 mb-5" style="overflow-wrap: break-word; word-break: break-word;">{{tituloIII.comentarios}}</p>
+            
+            {{#each comentariosIII}}
+            <div class="comment">
+                <p style="overflow-wrap: break-word;">{{comentarios}}</p>
+                <div>
+                    <a href="/links/deleteComment/{{id}}" class="eliminarComentario text-danger"><i class="fa-solid fa-x"></i></a>
+                </div>
+            </div>    
+            {{/each}}
+
+            <form action="/links/titulosProfesor/{{tituloIII.id}}" method="POST">
+                <div class="d-flex mt-5">
+                    <textarea class="textarea" name="comentarios" id="" placeholder="Escribir un comentario..."style="resize: none"></textarea>
+                    <button type="submit" class="btnComment">Enviar</button>
+                </div>
+            </form>
+
+
+            <div class="d-flex mt-5">
+                {{#if tituloIII.estatus}}
+                <div class="btnAprobado d-flex justify-content-center m-2 btn-sm mt-2">Aprobar</div>
+                {{else}}
+                <a href="/links/tituloAprobado/{{tituloI.id}}" class="btnAprobar d-flex justify-content-center m-2 btn btn-success btn-sm mt-2 text-decoration-none">Aprobar</a>
+                {{/if}}
+                <a href="/links/delete/{{tituloIII.id}}" class="btnRechazar d-flex justify-content-center m-2 btn btn-danger btn-sm mt-2 text-decoration-none">Rechazar</a>
+            </div>
+        </div>
+        {{/if}}
     {{else}}
         <div class="container mb-4" style="max-width: 800px">
-            <h2 class="text-center" style="color: #777777;">No hay Titulos Creados Aún</h2>
+            <h2 class="text-center" style="color: #777777;">No hay Títulos Creados Aún</h2>
         </div> 
-    {{/each}}
+    {{/if}}
 </div>

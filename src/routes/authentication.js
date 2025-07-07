@@ -1,10 +1,40 @@
 const express = require('express');
 const router = express.Router();
 
+const nodemailer = require('nodemailer');
+
 const passport = require('passport');
 const { isLoggedIn, isNotLoggedIn } = require('../lib/auth');
 const pool = require('../database');
 const helpers = require('../lib/helpers');
+
+
+enviarMail = async (correo, codigo) => {
+	
+	const config = {
+		host: 'smtp.gmail.com',
+		port: 587,
+		auth:{
+			user: 'proyectodegradoa3@gmail.com',
+			pass: 'xahe mjpc rleh vfjs'
+		}
+	}
+
+	const textoEnviar = 'Sú código de verificación es: '+codigo;
+
+	const mensaje = {
+		from: 'proyectodegradoa3@gmail.com',
+		to: correo,
+		subject: 'Código de Verificación - Propuesta de Grado',
+		text: textoEnviar
+	}
+
+	const transport = nodemailer.createTransport(config);
+	const info = await transport.sendMail(mensaje);
+	console.log(info);
+}
+
+
 
 //Signin
 router.get('/signin', isNotLoggedIn, (req, res) => {
@@ -180,9 +210,13 @@ router.post('/crearUser', async (req, res, done) => {
 router.get('/administrarEdit/:id', async (req, res) => {
 	const { id } = req.params;
 	const datos = await pool.query('SELECT * FROM usuarios WHERE id = ?', [id]);
+	var notStudent;
 
+	if (datos[0].userType !== 'estudiante') {
+		notStudent = true;
+	}
 	
-	res.render('links/administrarEdit', { userType: req.user ? req.user.userType : null, datos: datos[0]});
+	res.render('links/administrarEdit', { notStudent, userType: req.user ? req.user.userType : null, datos: datos[0]});
 
 });
 
@@ -211,6 +245,93 @@ router.post('/administrarEdit/:id', async (req, res, done) => {
 		res.redirect('/profile');
 	}
 });
+
+
+router.get('/recuperarCedula', (req, res) => {
+	res.render('auth/recuperarCedula');
+});
+
+router.post('/recuperarCedula', async (req, res) => {
+	const { cedula } = req.body;
+	let codigo = '';
+
+	for (let i = 0; i < 8; i++) {
+		codigo += Math.floor(Math.random() * 10);
+	}
+
+	const newCod = {
+		cedula,
+		codigo
+	}
+	
+	const userCedula = await pool.query('SELECT * FROM usuarios WHERE cedula = ?', [cedula]);
+
+	
+	if (userCedula.length > 0) {
+		const correo = userCedula[0].correo;
+		enviarMail(correo, codigo);
+		
+		const rows = await pool.query('SELECT * FROM recuperacion WHERE cedula = ?', [cedula]);
+
+		if (rows.length > 0) {
+			await pool.query('UPDATE recuperacion set ? WHERE cedula = ?', [newCod, cedula]);
+		} else {
+			await pool.query('INSERT INTO recuperacion set ?', [newCod]);
+		}
+	
+		res.redirect('/insertCod');
+	}else{
+		req.flash('danger', 'Cédula no Registrada');
+		res.redirect('/signup');
+	}
+});
+
+let cedulaRecuperarPassword = '';
+
+router.get('/insertCod', (req, res) => {
+	res.render('auth/insertCod');
+});
+
+router.post('/insertCod', async (req, res) => {
+	const { codigo } = req.body;
+
+	const rows = await pool.query('SELECT * FROM recuperacion WHERE codigo = ?', [codigo]);
+
+	if (rows.length > 0){
+		cedulaRecuperarPassword = rows[0].cedula;
+		res.redirect('/cambioPassword');
+	}else{
+		req.flash('danger', 'Código Incorrecto');
+	}
+
+	res.redirect(req.get('referer'));
+});
+
+router.get('/cambioPassword', async (req, res) => {
+	res.render('auth/cambioPassword');
+});
+
+router.post('/cambioPassword', async (req, res) => {
+	const { password, confirmarPassword } = req.body;
+
+	if (password != confirmarPassword) {
+		req.flash('danger', 'La Contraseña no Coincide');
+		res.redirect(req.get('referer'));
+	} else {
+		const newUser = {
+			password
+		};
+		newUser.password = await helpers.encryptPassword(password);
+		await pool.query('UPDATE usuarios set ? WHERE cedula = ?', [newUser, cedulaRecuperarPassword]);
+		await pool.query('DELETE FROM recuperacion WHERE cedula = ?', [cedulaRecuperarPassword]);
+		req.flash('success', 'Contraseña Actualizada');
+		res.redirect('/profile');
+	}
+
+});
+
+
+
 
 
 router.get('/deleteUser/:id', async (req, res) => {

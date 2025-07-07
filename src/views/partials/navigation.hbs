@@ -23,13 +23,13 @@
       {{#if user}}
       {{#if (isStudent userType)}}
       <li class="nav-item">
-        <a class="nav-link text-center" href="/links/titulos">Titulos</a>
+        <a class="nav-link text-center" href="/links/titulos">Títulos</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link text-center" href="/links/capitulos">Capitulos</a>
+        <a class="nav-link text-center" href="/links/capitulos">Capítulos</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link text-center" href="/logout">Cerrar Sesion</a>
+        <a class="nav-link text-center" href="/logout">Cerrar Sesión</a>
       </li>
       {{/if}}
       {{#if (isTeacher userType)}}
@@ -43,7 +43,7 @@
         <a class="nav-link text-center" href="/links/solicitudes/{{user.id}}">Solicitudes</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link text-center" href="/logout">Cerrar Sesion</a>
+        <a class="nav-link text-center" href="/logout">Cerrar Sesión</a>
       </li>
       {{/if}}
       {{#if (isAdmin userType)}}
@@ -60,12 +60,12 @@
         <a class="nav-link text-center" href="/crearUser">Crear Usuario</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link text-center" href="/logout">Cerrar Sesion</a>
+        <a class="nav-link text-center" href="/logout">Cerrar Sesión</a>
       </li>
       {{/if}}
       {{else}}
       <li class="nav-item">
-        <a class="nav-link" href="/signin">Iniciar Sesion</a>
+        <a class="nav-link" href="/signin">Iniciar Sesión</a>
       </li>
       <li class="nav-item">
         <a class="nav-link" href="/signup">Registrarse</a>

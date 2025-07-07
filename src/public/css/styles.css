@@ -93,6 +93,23 @@
     background: #ff5e00;    
 }
 
+.btnComment {
+    padding: 15px;
+    background: #adadad;
+    color: #ffffff;
+    border: none;
+    border-radius: 10px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.3s;
+    margin-left: 10px;
+}
+
+.btnComment:hover {
+    background: #919191;    
+}
+
 .sinArchivos {
     border: 2px dashed #ccc;
     border-radius: 20px;
@@ -182,6 +199,24 @@ select {
     background: url('data:image/svg+xml;utf8,<svg fill="%232d3436" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><path d="M7 10l5 5 5-5z"/></svg>') no-repeat right 10px center/15px 15px;
 }
 
+.etiqueta{
+    background-color: #f7f7f7;
+}
+
+.bloqueado{
+    width: 100%;
+    padding: 15px;
+    background: #77777777;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 600;
+    margin-top: 20px;
+    cursor: default;
+    transition: background 0.3s;
+}
+
 .btnAprobar {
     width: 100%;
     padding: 15px;
@@ -199,6 +234,21 @@ select {
 
 .btnAprobar:hover {
     background: #138b37;
+}
+
+.btnAprobado {
+    width: 100%;
+    padding: 15px;
+    background: #5a5a5a;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 600;
+    margin-top: 20px;
+    cursor: default;
+    transition: background 0.3s;
+    text-decoration: none;
 }
 
 .btnRechazar {

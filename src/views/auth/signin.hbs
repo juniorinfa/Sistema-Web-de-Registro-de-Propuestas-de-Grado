@@ -1,5 +1,6 @@
 <div class="container" style="max-width: 500px">
     <div class="header">
+        <img src="/img/unellez.png" width="140px" height="140px" alt="">
         <h1>Iniciar Sesión</h1>
     </div>
     <form action="/signin" class="registration-form" method="POST">
@@ -12,6 +13,10 @@
                 <label>Contraseña</label>
                 <input name="password" type="password" placeholder="••••••••••" required>
             </div>
+        </div>
+
+        <div class="login-link mt-1 mb-4 d-flex flex-row-reverse bd-highlight" style="font-size: 15px;">
+            <a href="/recuperarCedula" class="recuperarPassword">Olvidé mi Contraseña</a>
         </div>
 
         <button type="submit" class="signup-btn">Iniciar Sesión</button>

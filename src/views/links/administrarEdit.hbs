@@ -38,18 +38,24 @@
             <div class="input-group full-width">
                 <label>Tipo de Usuario</label>
                 <select name="userType" required>
+                    <option value="estudiante">Estudiante</option>
                     <option value="profesor">Profesor</option>
                     <option value="administrador">Administrador</option>
                 </select>
             </div>
+
+            {{#if notStudent}}
             <div class="input-group">
                 <label>Contraseña</label>
                 <input type="password" name="password" placeholder="••••••••••" required>
             </div> 
             <div class="input-group">
-                <label>Confirmar</label>
+                <label>Confirmar Contraseña</label>
                 <input type="password" name="confirmarPassword" placeholder="••••••••••" required>
             </div> 
+            {{/if}}
+
+            
         </div>
 
         <button type="submit" class="signup-btn">Editar</button>

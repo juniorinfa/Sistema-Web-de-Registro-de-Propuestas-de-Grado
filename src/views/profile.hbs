@@ -2,14 +2,14 @@
 {{#if estatus}}
 <div class="container" style="max-width: 75rem">
     <h1 class="text-center">Bienvenido {{user.nombre}} {{user.apellido}}</h1>
-    <a href="links/titulos"><button type="submit" class="signup-btn btnExtended" style="font-size: 2rem;">Titulos del
+    <a href="links/titulos"><button type="submit" class="signup-btn btnExtended" style="font-size: 2rem;">Títulos del
             Proyecto</button></a>
-    <a href="links/capitulos"><button type="submit" class="signup-btn btnExtended" style="font-size: 2rem;">Capitulos
+    <a href="links/capitulos"><button type="submit" class="signup-btn btnExtended" style="font-size: 2rem;">Capítulos
             del Proyecto</button></a>
 </div>
 {{else}}
 <div class="container mb-4 d-flex justify-content-center" style="max-width: 800px">
-    <h2 class="text-center" style="color: #777777;">Esperando la Aceptacion del Docente</h2>
+    <h2 class="text-center" style="color: #777777;">Esperando la Aceptación del Docente</h2>
 </div>
 {{/if}}
 {{/if}}
@@ -18,8 +18,9 @@
 {{#if (isAdmin userType)}}
 
 <div class="container my-2 p-4 d-flex justify-content-center flex-column flex-md-row" style="max-width: 75rem;">
-    <div style="width: 100%;">
-        <input name="buscador" id="buscador" class="form-control mx-2" type="number" placeholder="Filtrar por Cedula"
+    <div class="d-flex" style="width: 100%;">
+        <p class="btn etiqueta">Filtrar Estudiantes</p>
+        <input name="buscador" id="buscador" class="form-control mx-2" type="number" placeholder="Ingresar Cédula"
             aria-label="Search" style="max-width: 35rem;">
     </div>
     <div style="width: 100%;">
@@ -41,58 +42,20 @@
 {{/if}}
 {{#if (isTeacher userType)}}
 <div class="container my-2 p-4 d-flex justify-content-center" style="max-width: 75rem;">
-    <input name="buscador" id="buscador" class="form-control mx-2" type="number" placeholder="Filtrar por Cedula"
+    <p class="btn text-align-center etiqueta">Filtrar Estudiantes</p>
+    <input name="buscador" id="buscador" class="form-control mx-2" type="number" placeholder="Ingresar Cédula"
         aria-label="Search" style="max-width: 35rem;">
 </div>
 {{/if}}
 {{#if estudiantes}}
-<div class="container pb-2" style="max-width: 75rem">
-    <div class="d-flex justify-content-between flex-column flex-md-row">
-        <div>
-            <h6 class="text-center">Titulos Aprobados</h6>
-            <h6 class="text-center">{{totalTitulos}}/{{totalEstudiantes}}</h6>
-            <div class="canvas">
-                <canvas id="myChart1"></canvas>
-            </div>
-            <h6 class="text-center">{{estadisticaTitulo}}%</h6>
-        </div>
-        <div>
-            <h6 class="text-center">Capitulo I</h6>
-            <h6 class="text-center">{{totalCapI}}/{{totalEstudiantes}}</h6>
-            <div class="canvas">
-                <canvas id="myChart2"></canvas>
-            </div>
-            <h6 class="text-center">{{estadisticaCapI}}%</h6>
-        </div>
-        <div>
-            <h6 class="text-center">Capitulo II</h6>
-            <h6 class="text-center">{{totalCapII}}/{{totalEstudiantes}}</h6>
-            <div class="canvas">
-                <canvas id="myChart3"></canvas>
-            </div>
-            <h6 class="text-center">{{estadisticaCapII}}%</h6>
-        </div>
-        <div>
-            <h6 class="text-center">Capitulo III</h6>
-            <h6 class="text-center">{{totalCapIII}}/{{totalEstudiantes}}</h6>
-            <div class="canvas">
-                <canvas id="myChart4"></canvas>
-            </div>
-            <h6 class="text-center">{{estadisticaCapIII}}%</h6>
-        </div>
-    </div>
-    <div class="">
-        <button onclick="downloadPDF()" class="btn btn-light descargarEstadisticas"><i
-                class="fa-solid fa-download"></i></button>
-    </div>
-</div>
+
 <div class="container my-4 p-1 userFilter" style="max-width: 75rem;">
     <div class="d-flex justify-content-between align-items-center mx-2 my-1 etiquetas">
         <div class="d-flex separacionEstudiantes">
             <p class="text-secondary">Nombre y Apellido</p>
         </div>
         <div class="separacionEstudiantes">
-            <p class="text-secondary userCedula">Cedula</p>
+            <p class="text-secondary userCedula">Cédula</p>
         </div>
         <div class="separacionEstudiantes">
         </div>
@@ -111,9 +74,9 @@
         <div class="separacionEstudiantes">
             <div class="d-flex justify-content-between mx-4">
                 <a href="links/titulosProfesor/{{id}}"
-                    class="separacionEstudiantes btn btn-primary mx-2 text-decoration-none text-light">Titulos</a>
+                    class="separacionEstudiantes btn btn-primary mx-2 text-decoration-none text-light">Títulos</a>
                 <a href="links/capitulosProfesor/{{id}}"
-                    class="separacionEstudiantes btn btn-success mx-2 text-decoration-none text-light">Capitulos</a>
+                    class="separacionEstudiantes btn btn-success mx-2 text-decoration-none text-light">Capítulos</a>
                 <a href="/deleteUser/{{id}}"
                     class="separacionEstudiantes btn btn-danger mx-2 text-decoration-none text-light">Eliminar</a> 
             </div>
@@ -121,9 +84,51 @@
     </div>
 </div>
 {{/each}}
+
+<div class="container pb-2 mb-4" style="max-width: 75rem">
+    <div class="d-flex justify-content-between flex-column flex-md-row">
+        <div>
+            <h6 class="text-center">Títulos Aprobados</h6>
+            <h6 class="text-center">{{totalTitulos}}/{{totalEstudiantes}}</h6>
+            <div class="canvas">
+                <canvas id="myChart1"></canvas>
+            </div>
+            <h6 class="text-center">{{estadisticaTitulo}}%</h6>
+        </div>
+        <div>
+            <h6 class="text-center">Capítulo I</h6>
+            <h6 class="text-center">{{totalCapI}}/{{totalEstudiantes}}</h6>
+            <div class="canvas">
+                <canvas id="myChart2"></canvas>
+            </div>
+            <h6 class="text-center">{{estadisticaCapI}}%</h6>
+        </div>
+        <div>
+            <h6 class="text-center">Capítulo II</h6>
+            <h6 class="text-center">{{totalCapII}}/{{totalEstudiantes}}</h6>
+            <div class="canvas">
+                <canvas id="myChart3"></canvas>
+            </div>
+            <h6 class="text-center">{{estadisticaCapII}}%</h6>
+        </div>
+        <div>
+            <h6 class="text-center">Capítulo III</h6>
+            <h6 class="text-center">{{totalCapIII}}/{{totalEstudiantes}}</h6>
+            <div class="canvas">
+                <canvas id="myChart4"></canvas>
+            </div>
+            <h6 class="text-center">{{estadisticaCapIII}}%</h6>
+        </div>
+    </div>
+    <div class="">
+        <button onclick="downloadPDF()" class="btn btn-light descargarEstadisticas"><i
+                class="fa-solid fa-download"></i></button>
+    </div>
+</div>
+
 {{else}}
 <div class="container mb-4 d-flex justify-content-center" style="max-width: 800px">
-    <h2 class="text-center" style="color: #777777;">No hay Estudiante Aun</h2>
+    <h2 class="text-center" style="color: #777777;">No hay Estudiante Aún</h2>
 </div>
 {{/if}}
 {{/if}}
@@ -413,10 +418,10 @@
         pdf.setFontSize(24).text('Reporte Actualizado de Entregas', 42, 20);
         pdf.setFontSize(12).text(`Seccion ${seccionReport}: ${fechaHora}`, 62, 27);
 
-        pdf.setFontSize(16).text('Estadisticas Titulos', 32, 54);
-        pdf.setFontSize(10).text(`${totalTitulos} Titulos Aprobados de ${totalEstudiantes} Estudiantes.`, 25, 63);
-        pdf.setFontSize(10).text(`${porcentaje1}% de Titulos Aprobados.`, 40, 125);
-        pdf.setFontSize(10).text(`${resto1}% de Titulos Sin Evaluar.`, 40, 135);
+        pdf.setFontSize(16).text('Estadísticas Títulos', 32, 54);
+        pdf.setFontSize(10).text(`${totalTitulos} Títulos Aprobados de ${totalEstudiantes} Estudiantes.`, 25, 63);
+        pdf.setFontSize(10).text(`${porcentaje1}% de Títulos Aprobados.`, 40, 125);
+        pdf.setFontSize(10).text(`${resto1}% de Títulos Sin Evaluar.`, 40, 135);
 
         pdf.setFillColor(255, 133, 63); // RGB para naranja
         pdf.rect(
@@ -439,10 +444,10 @@
         pdf.addImage(canvasImage1, 'PNG', 35, 70, 45, 45);
 
 
-        pdf.setFontSize(16).text('Estadisticas Capitulo I', 122, 54);
-        pdf.setFontSize(10).text(`${totalCapI} Capitulos Entregados de ${totalEstudiantes} Estudiantes.`, 118, 63);
-        pdf.setFontSize(10).text(`${porcentaje2}% de Capitulos Recividos.`, 135, 125);
-        pdf.setFontSize(10).text(`${resto2}% de Capitulos Sin Evaluar.`, 135, 135);
+        pdf.setFontSize(16).text('Estadísticas Capítulo I', 122, 54);
+        pdf.setFontSize(10).text(`${totalCapI} Capítulos Entregados de ${totalEstudiantes} Estudiantes.`, 118, 63);
+        pdf.setFontSize(10).text(`${porcentaje2}% de Capítulos Recibidos.`, 135, 125);
+        pdf.setFontSize(10).text(`${resto2}% de Capítulos Sin Evaluar.`, 135, 135);
 
         pdf.setFillColor(255, 133, 63); // RGB para naranja
         pdf.rect(
@@ -465,10 +470,10 @@
         pdf.addImage(canvasImage2, 'PNG', 130, 70, 45, 45);
 
 
-        pdf.setFontSize(16).text('Estadisticas Capitulo II', 28, 169);
-        pdf.setFontSize(10).text(`${totalCapII} Capitulos Entregados de ${totalEstudiantes} Estudiantes.`, 23, 178);
-        pdf.setFontSize(10).text(`${porcentaje3}% de Capitulos Recividos.`, 40, 240);
-        pdf.setFontSize(10).text(`${resto3}% de Capitulos Sin Evaluar.`, 40, 250);
+        pdf.setFontSize(16).text('Estadísticas Capítulo II', 28, 169);
+        pdf.setFontSize(10).text(`${totalCapII} Capítulos Entregados de ${totalEstudiantes} Estudiantes.`, 23, 178);
+        pdf.setFontSize(10).text(`${porcentaje3}% de Capítulos Recibidos.`, 40, 240);
+        pdf.setFontSize(10).text(`${resto3}% de Capítulos Sin Evaluar.`, 40, 250);
 
         pdf.setFillColor(255, 133, 63); // RGB para naranja
         pdf.rect(
@@ -491,10 +496,10 @@
         pdf.addImage(canvasImage3, 'PNG', 35, 185, 45, 45);
 
 
-        pdf.setFontSize(16).text('Estadisticas Capitulo III', 122, 169);
-        pdf.setFontSize(10).text(`${totalCapIII} Capitulos Entregados de ${totalEstudiantes} Estudiantes.`, 118, 178);
-        pdf.setFontSize(10).text(`${porcentaje4}% de Capitulos Recividos.`, 135, 240);
-        pdf.setFontSize(10).text(`${resto4}% de Capitulos Sin Evaluar.`, 135, 250);
+        pdf.setFontSize(16).text('Estadísticas Capítulo III', 122, 169);
+        pdf.setFontSize(10).text(`${totalCapIII} Capítulos Entregados de ${totalEstudiantes} Estudiantes.`, 118, 178);
+        pdf.setFontSize(10).text(`${porcentaje4}% de Capítulos Recibidos.`, 135, 240);
+        pdf.setFontSize(10).text(`${resto4}% de Capítulos Sin Evaluar.`, 135, 250);
 
         pdf.setFillColor(255, 133, 63); // RGB para naranja
         pdf.rect(

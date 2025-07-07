@@ -1,15 +1,15 @@
 <div style="width: 100%">
     <div class="container mb-5" style="max-width: 800px">
         <div class="header">
-            <h1>Capitulos de Propuestas de Grado</h1>
+            <h1>Capítulos de Propuestas de Grado</h1>
         </div>
         <form action="/links/capitulos" enctype="multipart/form-data" class="registration-form" method="POST">
             <div class="mb-4">
                 <div class="input-group">
                     <select name="num_cap" id="">
-                        <option value="CapituloI">Capitulo I</option>
-                        <option value="CapituloII">Capitulo II</option>
-                        <option value="CapituloIII">Capitulo III</option>
+                        <option value="CapituloI">Capítulo I</option>
+                        <option value="CapituloII">Capítulo II</option>
+                        <option value="CapituloIII">Capítulo III</option>
                     </select>
                     <div class="drop-zone" onclick="document.getElementById('fileInput').click()">
                         <div id="fileInfo"><h5>📄 Subir un Archivo PDF</h5></div>
@@ -18,7 +18,7 @@
                 </div>
                 <div id="fileInfo"></div>
                 <div class="">
-                    <button type="submit" class="signup-btn m-1">Enviar Capitulo</button>
+                    <button type="submit" class="signup-btn m-1">Enviar Capítulo</button>
                 </div>
             </div>
 
@@ -51,7 +51,7 @@
     <div>
         <div class="container mb-4" style="max-width: 800px">
             <div class="header">
-                <h2 class="text-center">Capitulo I</h2>
+                <h2 class="text-center">Capítulo I</h2>
             </div>
         {{#if capituloI}}
             <a href="http://localhost:4000/uploads/{{capituloI.capitulo}}" target="_blank" style="text-decoration: none;">
@@ -79,7 +79,7 @@
 
         <div class="container mb-4" style="max-width: 800px">
             <div class="header">
-                <h2 class="text-center">Capitulo II</h2>
+                <h2 class="text-center">Capítulo II</h2>
             </div>
         {{#if capituloII}}
             <a href="http://localhost:4000/uploads/{{capituloII.capitulo}}" target="_blank" style="text-decoration: none;">
@@ -107,7 +107,7 @@
 
         <div class="container mb-4" style="max-width: 800px">
             <div class="header">
-                <h2 class="text-center">Capitulo III</h2>
+                <h2 class="text-center">Capítulo III</h2>
             </div>
         {{#if capituloIII}}
             <a href="http://localhost:4000/uploads/{{capituloIII.capitulo}}" target="_blank" style="text-decoration: none;">
